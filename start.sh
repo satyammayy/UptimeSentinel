@@ -1,14 +1,10 @@
 #!/bin/bash
 
 # Start a new tmux session named 'app'
-tmux new-session -d -s app
+tmux new-session -d -s app "node ap.js"
 
-# Run ap.js in the first pane interactively
-tmux send-keys -t app "node ap.js" Enter
-
-# Split the window horizontally and run monitor.js interactively in the second pane
-tmux split-window -h
-tmux send-keys -t app:0.1 "node monitor.js" Enter
+# Split the tmux pane and run monitor.js
+tmux split-window -h "node monitor.js"
 
 # Attach to the tmux session
 tmux attach-session -t app
