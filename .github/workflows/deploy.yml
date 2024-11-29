@@ -34,12 +34,4 @@ jobs:
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/uptimesentinel:latest
 
-    # Step 5: Deploy to Server
-    - name: Deploy to Server (Optional)
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-        docker pull ${{ secrets.DOCKER_USERNAME }}/uptimesentinel:latest
-        docker stop uptimesentinel || true
-        docker rm uptimesentinel || true
-        docker run -d -p 3000:3000 --name uptimesentinel ${{ secrets.DOCKER_USERNAME }}/uptimesentinel:latest
-        EOF
+  
